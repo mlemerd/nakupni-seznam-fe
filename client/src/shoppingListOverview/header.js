@@ -1,20 +1,45 @@
-import { useContext } from "react"
-import { UserContext } from "../users/userProvider"
+import { useContext } from "react";
+import { UserContext } from "../users/userProvider";
+import { Dropdown } from "react-bootstrap";
 
-function Header () {
-    const { userList, loggedInUser, setLoggedInUser } = useContext(UserContext)
+
+function Header() {
+    const { userList, loggedInUser, setLoggedInUser } = useContext(UserContext);
+
+    const loggedInUserName = userList.find(user => user.id === loggedInUser)?.name || "Vyber uživatele"
 
     return (
-        <div>
-            AppName
+        <div class="row">
+            <div class="col-11">
+                AppName
+            </div>
 
-            {userList.map((user) =>(
-                <button key={user.id} onClick={() => setLoggedInUser(user.id)}>
-                    {user.name} {(user.id === loggedInUser).toString()}
-                </button>
-            ))}
+            <div class="col">
+                <Dropdown>
+                    <Dropdown.Toggle variant="secondary" id="dropdown-basic">
+                        {loggedInUserName}
+                    </Dropdown.Toggle>
+
+                    <Dropdown.Menu>
+                        {userList.map((user) => (
+                            <Dropdown.Item 
+                                key={user.id} 
+                                href="#" 
+                                onClick={() => setLoggedInUser(user.id)}
+                                style={{
+
+                                    backgroundColor: user.id === loggedInUser ? '#007bff' : 'transparent',
+                                    color: user.id === loggedInUser ? 'white' : 'black',
+                                }}>
+                                    {user.name} 
+                                    {/* {(user.id === loggedInUser).toString()} */}
+                            </Dropdown.Item>
+                        ))}
+                    </Dropdown.Menu>
+                </Dropdown>
+            </div>
         </div>
-    )
+    );
 }
 
-export default Header
+export default Header;

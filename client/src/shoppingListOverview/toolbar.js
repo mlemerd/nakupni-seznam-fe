@@ -1,10 +1,12 @@
+import { Button } from "react-bootstrap"
+
 function Toolbar ({handleCreate, showArchived, setShowArchived}) {
     return (
         <div>
-            <button onClick={() => handleCreate()}>Create</button>
-            <button onClick={() => setShowArchived((current) => !current)}>
+            <Button type="btn" onClick={() => handleCreate()}>Create</Button>
+            <Button type="btn" onClick={() => setShowArchived((current) => !current)}>
                 Filter
-            </button>
+            </Button>
         </div>
     )
 }

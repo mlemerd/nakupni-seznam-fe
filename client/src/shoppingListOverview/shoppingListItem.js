@@ -1,11 +1,11 @@
 import { useState, createContext, useContext } from "react";
 
-//import { UserContext } from "../users/userProvider";
+import { UserContext } from "../users/userProvider";
 
 const ShoppingListContext = createContext();
 
 export function ShoppingListProvider({ children }) {
-//    const {loggedInUser} = useContext(UserContext)
+    const {loggedInUser} = useContext(UserContext)
     const [shoppingListOverviewList, setShoppingListOverviewList] = useState([
         {
             id: "sl01",
@@ -30,7 +30,7 @@ export function ShoppingListProvider({ children }) {
                 id: Math.random().toString(),
                 name: "Nový úkol",
                 state: "active",
-                owner: "loggedInUser",
+                owner: loggedInUser,
                 memberList: [],
             }
         ]);
