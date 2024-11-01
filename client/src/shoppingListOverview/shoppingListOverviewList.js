@@ -6,12 +6,7 @@ function OverviewList ({shoppingListOverviewList, handleArchive, handleDelete}) 
         handleArchive,
         handleDelete
     } = useShoppingList())
-    /*  const {
-        shoppingListOverviewList,
-        handleArchive,
-        handleDelete
-    } = useShoppingList();
-  */
+
     return(
         <div>
             <h2>Shopping List Overview</h2>

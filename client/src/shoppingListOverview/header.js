@@ -9,12 +9,12 @@ function Header() {
     const loggedInUserName = userList.find(user => user.id === loggedInUser)?.name || "Vyber uživatele"
 
     return (
-        <div class="row">
-            <div class="col-11">
+        <div className="row">
+            <div className="col-11">
                 AppName
             </div>
 
-            <div class="col">
+            <div className="col">
                 <Dropdown>
                     <Dropdown.Toggle variant="secondary" id="dropdown-basic">
                         {loggedInUserName}

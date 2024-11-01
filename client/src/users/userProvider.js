@@ -30,6 +30,7 @@ function UserProvider ({children}) {
         setLoggedInUser
     }
 
+    console.log('Initial loggedInUser:', loggedInUser);
     return <UserContext.Provider value={value}>{children}</UserContext.Provider>
 }
 
