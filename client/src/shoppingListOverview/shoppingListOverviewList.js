@@ -1,12 +1,17 @@
 import useShoppingList from "./shoppingListItem";
 
-function OverviewList () {
-    const {
+function OverviewList ({shoppingListOverviewList, handleArchive, handleDelete}) {
+
+    ({shoppingListOverviewList,
+        handleArchive,
+        handleDelete
+    } = useShoppingList())
+    /*  const {
         shoppingListOverviewList,
         handleArchive,
         handleDelete
     } = useShoppingList();
-
+  */
     return(
         <div>
             <h2>Shopping List Overview</h2>

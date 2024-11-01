@@ -37,18 +37,19 @@ export function ShoppingListProvider({ children }) {
     }
 
     function handleArchive(dtoIn) {
-        setShoppingListOverviewList((current) => 
-            current.map((item) =>
-                item.id === dtoIn.id ? { ...item, state: "archived" } : item
-            )
-        );
-    }
+        setShoppingListOverviewList((current) => {
+          const itemIndex = current.findIndex((item) => item.id === dtoIn.id);
+          current[itemIndex] = { ...current[itemIndex], state: "archived" };
+          return current.slice();
+        });
+      }
 
     function handleDelete(dtoIn) {
         setShoppingListOverviewList((current) => 
             current.filter((item) => item.id !== dtoIn.id)
         );
     }
+
 
     return (
         <ShoppingListContext.Provider value={{

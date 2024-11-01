@@ -1,7 +1,12 @@
 import OverviewProvider from "./shoppingListOVerviewProvider";
+import { ShoppingListProvider } from "./shoppingListItem";
 
 function Overview () {
-    return <OverviewProvider />
+    return (
+        <ShoppingListProvider>
+            <OverviewProvider />
+        </ShoppingListProvider>
+)
 }
 
 export default Overview

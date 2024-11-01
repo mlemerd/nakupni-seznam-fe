@@ -5,7 +5,7 @@ function Toolbar ({handleCreate, showArchived, setShowArchived}) {
         <div>
             <Button type="btn" onClick={() => handleCreate()}>Create</Button>
             <Button type="btn" onClick={() => setShowArchived((current) => !current)}>
-                Filter
+                Filter {showArchived.toString()}
             </Button>
         </div>
     )
