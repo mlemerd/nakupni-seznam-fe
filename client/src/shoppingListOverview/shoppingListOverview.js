@@ -1,12 +1,12 @@
 import OverviewProvider from "./shoppingListOVerviewProvider";
 import { ShoppingListProvider } from "./shoppingListItem";
 
-function Overview () {
+function Overview ({setSelectedList}) {
     return (
         <ShoppingListProvider>
-            <OverviewProvider />
+            <OverviewProvider setSelectedList={setSelectedList}/>
         </ShoppingListProvider>
-)
+    )
 }
 
 export default Overview

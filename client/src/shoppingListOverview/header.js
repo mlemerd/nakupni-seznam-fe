@@ -11,7 +11,9 @@ function Header() {
     return (
         <div className="row">
             <div className="col-11">
-                AppName
+                <h2>
+                     AppName
+                </h2>
             </div>
 
             <div className="col">

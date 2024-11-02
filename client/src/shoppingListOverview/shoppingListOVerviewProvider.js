@@ -4,10 +4,12 @@ import Toolbar from "./toolbar";
 import { useShoppingList } from "./shoppingListItem";
 import OverviewList from "./shoppingListOverviewList";
 import {UserContext} from "../users/userProvider";
+import Detail from "./detail/detail";
 
-function OverviewProvider() {
+function OverviewProvider({setSelectedList}) {
     const { shoppingListOverviewList, handleCreate, handleArchive, handleDelete } = useShoppingList();
     const [showArchived, setShowArchived] = useState(false);
+    const [selectedList] = useState(true)
     const { loggedInUser = null } = useContext(UserContext) || {};
 
    // console.log('Logged-in user in OverviewProvider:', loggedInUser);
@@ -28,19 +30,25 @@ function OverviewProvider() {
     }, [showArchived, shoppingListOverviewList, loggedInUser]);
 
     return (
-        <>
-            <Header />
-            <Toolbar 
-                handleCreate={handleCreate}
-                showArchived={showArchived}
-                setShowArchived={setShowArchived}
-            />
-            <OverviewList 
-                shoppingListOverviewList={filteredShoppingListList}
-                handleArchive={handleArchive}
-                handleDelete={handleDelete}
-            />
-        </>
+        <div className="row">
+            <div className="col-5">
+                <Header />
+                <Toolbar 
+                    handleCreate={handleCreate}
+                    showArchived={showArchived}
+                    setShowArchived={setShowArchived}
+                />
+                <OverviewList 
+                    shoppingListOverviewList={filteredShoppingListList}
+                    handleArchive={handleArchive}
+                    handleDelete={handleDelete}
+                    setSelectedList={setSelectedList}
+                />
+            </div>
+            <div style={{ flex: 1 }}>
+                {selectedList && <Detail selectedList={selectedList} />}
+            </div>
+        </div>
     );
 }
 

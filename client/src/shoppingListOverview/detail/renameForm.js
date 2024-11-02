@@ -29,7 +29,7 @@ function RenameForm({ show, handleClose, data, handlerMap }) {
                 />
             </Modal.Body>
             <Modal.Footer>
-                <Button type="btn" variant="secondary" onClick={handleClose}>
+                <Button variant="secondary" onClick={handleClose}>
                     Zavřít
                 </Button>
                 <Button type="submit" variant="primary">
