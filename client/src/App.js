@@ -11,8 +11,14 @@ function App() {
 
   return (
     <UserProvider>
-      <Overview setSelectedList={setSelectedList} />
-      <Detail selectedList={selectedList}/> 
+      <div className='row'>
+        <div className='col-8'>
+          <Overview setSelectedList={setSelectedList} />
+        </div>
+        <div className='position-absolute start-50'>
+          <Detail selectedList={selectedList}/> 
+        </div>
+      </div>
     </UserProvider>
   );
 }

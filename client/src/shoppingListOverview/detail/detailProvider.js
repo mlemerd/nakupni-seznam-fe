@@ -1,4 +1,53 @@
-import { createContext, useMemo, useState } from "react";
+import { createContext, useState, useEffect } from "react";
+//import Toolbar from "./detailToolbar";
+//import MemberList from "./memberList";
+
+export const DetailContext = createContext();
+
+function DetailProvider({ children, selectedList }) {
+    const [data, setData] = useState(selectedList || { name: "", state: "", owner: "", memberList: [] });
+    const handlerMap = {
+        updateName: (updatedData) => {
+            console.log("Updating name: ", updatedData)
+            setData((current) => ({ ...current, ...updatedData }))
+        // další handlery mohou jít sem
+        },
+        addMember: ({ memberId }) => {
+            setData((current) => {
+                if (!current.memberList.includes(memberId))
+                current.memberList.push(memberId);
+                return { ...current };
+            });
+        },
+        removeMember: ({ memberId }) => {
+        setData((current) => {
+            const memberIndex = current.memberList.findIndex(
+            (item) => item === memberId
+            );
+            if (memberIndex > -1) current.memberList.splice(memberIndex, 1);
+            return { ...current };
+        });
+        },
+    };
+
+    useEffect(() => {
+        setData(selectedList);
+    }, [selectedList]);
+
+    const value = { data, handlerMap };
+    console.log('DetailContext value:', value);
+
+    return (
+        <DetailContext.Provider value={value}>
+            {children}
+        </DetailContext.Provider>
+    );
+}
+
+export default DetailProvider;
+
+
+/* import { createContext, useMemo, useState } from "react";
 
 export const DetailContext = createContext();
 
@@ -14,7 +63,7 @@ function DetailProvider({ children, selectedList }) {
         name: "první úkol",
         resolved: false,
       },
-  ]}, */
+  ]}, 
   );
 
   const [showResolved, setShowResolved] = useState(false);
@@ -105,4 +154,4 @@ function DetailProvider({ children, selectedList }) {
   );
 }
 
-export default DetailProvider;
+export default DetailProvider; */

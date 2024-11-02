@@ -1,12 +1,16 @@
 import DetailProvider from "./detailProvider";
 import Toolbar from "./detailToolbar";
 import MemberList from "./memberList";
+import { ShoppingListProvider } from "../shoppingListItem";
 
 import { Card } from "react-bootstrap";
 
 function Detail ({selectedList}) {
+    if (!selectedList) {
+        return <p>Select a shopping list to see details</p>;
+    }
     return (
-        <div>
+        <div style={{width: 600}}>
             <Card className="card-header">
                 <h3>
                     Detail seznamu
@@ -16,12 +20,13 @@ function Detail ({selectedList}) {
                 <p>Majitel: {selectedList.owner}</p>
             </Card>
             <Card className="card-body">
-                <Toolbar/>
-              <DetailProvider>
+              <DetailProvider selectedList={selectedList}>
+                <ShoppingListProvider>
+                    <Toolbar/>
+                </ShoppingListProvider>
                  <MemberList/>
               </DetailProvider>
             </Card>
-
         </div>
     )
 }

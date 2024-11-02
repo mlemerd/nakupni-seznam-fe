@@ -45,9 +45,10 @@ function OverviewProvider({setSelectedList}) {
                     setSelectedList={setSelectedList}
                 />
             </div>
-            <div style={{ flex: 1 }}>
-                {selectedList && <Detail selectedList={selectedList} />}
-            </div>
+            {/* <div>
+                <Detail/>
+{/*                 {selectedList && <Detail selectedList={selectedList} />} 
+            </div> */}
         </div>
     );
 }

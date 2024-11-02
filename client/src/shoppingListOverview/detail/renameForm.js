@@ -2,8 +2,11 @@ import  Modal  from "react-bootstrap/modal";
 import  Form  from "react-bootstrap/form";
 import Button from "react-bootstrap/button";
 import {ModalTitle} from "react-bootstrap";
+import { useContext } from "react";
+import { DetailContext } from "./detailProvider";
 
-function RenameForm({ show, handleClose, data, handlerMap }) {
+function RenameForm({ show, handleClose, data }) {
+    const {handlerMap}= useContext(DetailContext)
     return (
         <Modal show={show} onHide={handleClose}>
           <Form
