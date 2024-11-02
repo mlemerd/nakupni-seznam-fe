@@ -1,5 +1,4 @@
 import { useContext } from "react";
-import useShoppingList from "./shoppingListItem";
 import { UserContext } from "../users/userProvider";
 
 function OverviewList({ shoppingListOverviewList, handleArchive, handleDelete }) {
