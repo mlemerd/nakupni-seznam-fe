@@ -10,11 +10,11 @@ function OverviewProvider() {
     const [showArchived, setShowArchived] = useState(false);
     const { loggedInUser = null } = useContext(UserContext) || {};
 
-    console.log('Logged-in user in OverviewProvider:', loggedInUser);
+   // console.log('Logged-in user in OverviewProvider:', loggedInUser);
 
     const filteredShoppingListList = useMemo(() => {
         if (!loggedInUser) {
-            console.log('No logged-in user');
+      //      console.log('No logged-in user');
             return [];
         } // Handle case where there is no logged-in user
 
@@ -22,7 +22,7 @@ function OverviewProvider() {
             const isOwner = item.owner === loggedInUser;
             const isMember = item.memberList?.includes(loggedInUser);
             const isActive = item.state === "active";
-            console.log('showArchived:', showArchived, 'isOwner:', isOwner, 'isMember:', isMember, 'isActive:', isActive);
+      //      console.log('showArchived:', showArchived, 'isOwner:', isOwner, 'isMember:', isMember, 'isActive:', isActive);
             return showArchived ? (isOwner || isMember) : (isActive && (isOwner || isMember));
         });
     }, [showArchived, shoppingListOverviewList, loggedInUser]);
