@@ -1,6 +1,7 @@
 import DetailProvider from "./detailProvider";
 import Toolbar from "./detailToolbar";
 import MemberList from "./memberList";
+import ItemList from "./itemList";
 import { ShoppingListProvider } from "../shoppingListItem";
 
 import { Card } from "react-bootstrap";
@@ -25,6 +26,7 @@ function Detail ({selectedList}) {
                     <Toolbar/>
                 </ShoppingListProvider>
                  <MemberList/>
+                 <ItemList/>
               </DetailProvider>
             </Card>
         </div>

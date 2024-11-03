@@ -5,7 +5,88 @@ import { createContext, useState, useEffect } from "react";
 export const DetailContext = createContext();
 
 function DetailProvider({ children, selectedList }) {
-    const [data, setData] = useState(selectedList || { name: "", state: "", owner: "", memberList: [] });
+    const defaultData = { name: "", state: "", owner: "", memberList: [], itemList: [{id:"it01", name:"první položka", resolved:"false",},], }
+    const [data, setData] = useState(selectedList || defaultData);
+    const [showResolved, setShowResolved] = useState(false);
+
+    const handlerMap = {
+        updateName: (updatedData) => {
+            console.log('Updating name:', updatedData);
+            setData((current) => ({ ...current, ...updatedData }));
+        },
+        addMember: ({ memberId }) => {
+          setData((current) => {
+              if (!current.memberList.includes(memberId))
+              current.memberList.push(memberId);
+              return { ...current };
+          });
+        },
+        removeMember: ({ memberId }) => {
+          setData((current) => {
+            const memberIndex = current.memberList.findIndex(
+            (item) => item === memberId
+            );
+            if (memberIndex > -1) current.memberList.splice(memberIndex, 1);
+            return { ...current };
+        });
+        },
+        addItem: () => {
+          setData((current) => {
+            current.itemList.push({
+              id: Math.random(),
+              name: "",
+              resolved: false,
+            });
+            return { ...current };
+          });
+        },
+        updateItemName: ({ id, name }) => {
+            setData((current) => ({
+                ...current,
+                itemList: current.itemList.map(item => item.id === id ? { ...item, name } : item)
+            }));
+        },
+        toggleResolveItem: ({ id }) => {
+            setData((current) => ({
+                ...current,
+                itemList: current.itemList.map(item => item.id === id ? { ...item, resolved: !item.resolved } : item)
+            }));
+        },
+        deleteItem: ({ id }) => {
+            setData((current) => ({
+                ...current,
+                itemList: current.itemList.filter(item => item.id !== id)
+            }));
+        }
+    };
+
+    useEffect(() => {
+        console.log('Selected List updated: ', selectedList);
+        setData(selectedList || { name: "", state: "", owner: "", memberList: [], itemList: [] });
+    }, [selectedList]);
+
+    const value = { data, handlerMap, showResolved, toggleShowResolved: () => setShowResolved(!showResolved) };
+    console.log('DetailContext value:', value);
+
+    return (
+        <DetailContext.Provider value={value}>
+            {children}
+        </DetailContext.Provider>
+    );
+}
+
+export default DetailProvider;
+
+
+/* import { createContext, useState, useEffect } from "react";
+//import Toolbar from "./detailToolbar";
+//import MemberList from "./memberList";
+
+export const DetailContext = createContext();
+
+function DetailProvider({ children, selectedList }) {
+    const [data, setData] = useState(selectedList || { name: "", state: "", owner: "", memberList: [], itemList: [] });
+    const [showResolved, setShowResolved] = useState(false)
     const handlerMap = {
         updateName: (updatedData) => {
             console.log("Updating name: ", updatedData)
@@ -20,7 +101,7 @@ function DetailProvider({ children, selectedList }) {
             });
         },
         removeMember: ({ memberId }) => {
-        setData((current) => {
+          setData((current) => {
             const memberIndex = current.memberList.findIndex(
             (item) => item === memberId
             );
@@ -28,13 +109,41 @@ function DetailProvider({ children, selectedList }) {
             return { ...current };
         });
         },
+        addItem: () => {
+          setData((current) => ({
+              ...current,
+              itemList: [
+                  ...current.itemList,
+                  { id: Math.random().toString(), name: "New Item", resolved: false }
+              ]
+          }));
+          },
+          updateItemName: ({ id, name }) => {
+            setData((current) => ({
+                ...current,
+                itemList: current.itemList.map(item => item.id === id ? { ...item, name } : item)
+            }));
+          },
+          toggleResolveItem: ({ id }) => {
+            setData((current) => ({
+                ...current,
+                itemList: current.itemList.map(item => item.id === id ? { ...item, resolved: !item.resolved } : item)
+            }));
+          },
+          deleteItem: ({ id }) => {
+            setData((current) => ({
+                ...current,
+                itemList: current.itemList.filter(item => item.id !== id)
+            }));
+          }
     };
 
     useEffect(() => {
-        setData(selectedList);
+        console.log("selected list updated: ", selectedList)
+        setData(selectedList || {name:"", state:"", owner:"", memberList:[], itemList:[]});
     }, [selectedList]);
 
-    const value = { data, handlerMap };
+    const value = { data, handlerMap, showResolved, toggleShowResolved: () => setShowResolved(!showResolved) };
     console.log('DetailContext value:', value);
 
     return (
@@ -44,7 +153,7 @@ function DetailProvider({ children, selectedList }) {
     );
 }
 
-export default DetailProvider;
+export default DetailProvider; */
 
 
 /* import { createContext, useMemo, useState } from "react";

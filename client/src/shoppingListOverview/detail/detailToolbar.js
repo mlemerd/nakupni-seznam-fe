@@ -17,6 +17,10 @@ function Toolbar () {
         console.log("shoppingListOverviewList: ", shoppingListOverviewList)
     }, [shoppingListOverviewList])
 
+    useEffect(() => {
+        console.log("DetailContext data: ", data);
+    }, [data]);
+
     if (!shoppingListOverviewList) {
         return <div>Loading...</div>;
     }
