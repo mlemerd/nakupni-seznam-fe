@@ -1,71 +1,95 @@
-import { createContext, useState, useEffect } from "react";
-//import Toolbar from "./detailToolbar";
-//import MemberList from "./memberList";
+import { createContext, useState, useEffect, useMemo } from "react";
 
 export const DetailContext = createContext();
 
 function DetailProvider({ children, selectedList }) {
-    const defaultData = { name: "", state: "", owner: "", memberList: [], itemList: [{id:"it01", name:"první položka", resolved:"false",},], }
-    const [data, setData] = useState(selectedList || defaultData);
+    const defaultData = {
+        id: "",
+        name: "",
+        owner: "",
+        memberList: [],
+        itemList: [
+            {
+                id: "td01",
+                name: "první úkol",
+                resolved: false,
+            },
+        ],
+    };
+    
+    // Pokud selectedList nemá itemList, zajistíme, že je inicializován jako prázdné pole
+    const [data, setData] = useState(selectedList ? { ...selectedList, itemList: selectedList.itemList || [] } : defaultData);
     const [showResolved, setShowResolved] = useState(false);
 
-    const handlerMap = {
-        updateName: (updatedData) => {
-            console.log('Updating name:', updatedData);
-            setData((current) => ({ ...current, ...updatedData }));
-        },
-        addMember: ({ memberId }) => {
-          setData((current) => {
-              if (!current.memberList.includes(memberId))
-              current.memberList.push(memberId);
-              return { ...current };
-          });
-        },
-        removeMember: ({ memberId }) => {
-          setData((current) => {
-            const memberIndex = current.memberList.findIndex(
-            (item) => item === memberId
-            );
-            if (memberIndex > -1) current.memberList.splice(memberIndex, 1);
-            return { ...current };
-        });
-        },
-        addItem: () => {
-          setData((current) => {
-            current.itemList.push({
-              id: Math.random(),
-              name: "",
-              resolved: false,
-            });
-            return { ...current };
-          });
-        },
-        updateItemName: ({ id, name }) => {
-            setData((current) => ({
-                ...current,
-                itemList: current.itemList.map(item => item.id === id ? { ...item, name } : item)
-            }));
-        },
-        toggleResolveItem: ({ id }) => {
-            setData((current) => ({
-                ...current,
-                itemList: current.itemList.map(item => item.id === id ? { ...item, resolved: !item.resolved } : item)
-            }));
-        },
-        deleteItem: ({ id }) => {
-            setData((current) => ({
-                ...current,
-                itemList: current.itemList.filter(item => item.id !== id)
-            }));
+    const filteredData = useMemo(() => {
+        const result = { ...data };
+        if (!showResolved) {
+            result.itemList = result.itemList?.filter((item) => !item.resolved) || [];
         }
+        return result;
+    }, [data, showResolved]);
+
+    const value = {
+        data: filteredData,
+        handlerMap: {
+            updateName: (updatedData) => {
+                console.log('Updating name:', updatedData);
+                setData((current) => ({ ...current, ...updatedData }));
+            },
+            addMember: ({ memberId }) => {
+                setData((current) => {
+                    if (!current.memberList.includes(memberId)) {
+                        current.memberList.push(memberId);
+                    }
+                    return { ...current };
+                });
+            },
+            removeMember: ({ memberId }) => {
+                setData((current) => {
+                    const memberIndex = current.memberList.findIndex((item) => item === memberId);
+                    if (memberIndex > -1) current.memberList.splice(memberIndex, 1);
+                    return { ...current };
+                });
+            },
+            addItem: () => {
+                setData((current) => {
+                    const updatedItemList = current.itemList || [];
+                    updatedItemList.push({
+                        id: Math.random().toString(),
+                        name: "",
+                        resolved: false,
+                    });
+                    return { ...current, itemList: updatedItemList };
+                });
+            },
+            updateItemName: ({ id, name }) => {
+                setData((current) => ({
+                    ...current,
+                    itemList: current.itemList.map((item) => (item.id === id ? { ...item, name } : item)),
+                }));
+            },
+            toggleResolveItem: ({ id }) => {
+                setData((current) => ({
+                    ...current,
+                    itemList: current.itemList.map((item) => (item.id === id ? { ...item, resolved: !item.resolved } : item)),
+                }));
+            },
+            deleteItem: ({ id }) => {
+                setData((current) => ({
+                    ...current,
+                    itemList: current.itemList.filter((item) => item.id !== id),
+                }));
+            },
+        },
+        showResolved,
+        toggleShowResolved: () => setShowResolved((current) => !current),
     };
 
     useEffect(() => {
         console.log('Selected List updated: ', selectedList);
-        setData(selectedList || { name: "", state: "", owner: "", memberList: [], itemList: [] });
+        setData(selectedList ? { ...selectedList, itemList: selectedList.itemList || [] } : defaultData);
     }, [selectedList]);
 
-    const value = { data, handlerMap, showResolved, toggleShowResolved: () => setShowResolved(!showResolved) };
     console.log('DetailContext value:', value);
 
     return (
@@ -76,6 +100,8 @@ function DetailProvider({ children, selectedList }) {
 }
 
 export default DetailProvider;
+
+
 
 
 /* import { createContext, useState, useEffect } from "react";

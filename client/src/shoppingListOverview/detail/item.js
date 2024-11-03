@@ -12,10 +12,10 @@ function Item ({data, handlerMap}) {
                 onBlur={() => handlerMap.updateItemName({ id: data.id, name: value })}
             /> {" "}
             <button onClick={() => handlerMap.toggleResolveItem({ id: data.id })}>
-                {data.resolved ? "unresolve" : "resolve"}
+                {data.resolved ? "vrátit" : "hotovo"}
             </button>
             <button onClick={() => handlerMap.deleteItem({ id: data.id })}>
-                delete
+                smazat
             </button>
         </div>
     )

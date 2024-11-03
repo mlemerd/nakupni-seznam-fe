@@ -16,9 +16,9 @@ function ItemList() {
 
     return (
         <div>
-            Item List <button onClick={() => handlerMap.addItem()}>Add Item</button>
+            Item List <button onClick={() => handlerMap.addItem()}>Přidat položku</button>
             <button onClick={() => toggleShowResolved()}>
-                {showResolved ? "Not Resolved Only" : "All Items"}
+                {showResolved ? "Zobrazit pouze nevyřešené" : "Zobrazit všechny položky"}
             </button>
             <div>
                 {data.itemList.map((item) => (

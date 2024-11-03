@@ -5,7 +5,7 @@ function RemoveMember({ data, handlerMap, isOwner, showRemoveButton }) {
         {isOwner ? " true " : " "}
         {showRemoveButton ? (
           <button onClick={() => handlerMap.removeMember({ memberId: data.id })}>
-            remove
+            odebrat
           </button>
         ) : null}
       </div>
