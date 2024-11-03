@@ -41,18 +41,6 @@ function MemberList() {
             }
           />
         ))}
-      {/*   <RemoveMember memberId={data.owner} data={userMap[data.owner]} isOwner={true} />
-        {data.memberList.map((memberId) => (
-          <RemoveMember
-            key={memberId}
-            memberId={memberId}
-            data={userMap[memberId]}
-            handlerMap={handlerMap}
-            showRemoveButton={
-              loggedInUser === data.owner || memberId === loggedInUser
-            }
-          />
-        ))} */}
       </div>
     );
   }

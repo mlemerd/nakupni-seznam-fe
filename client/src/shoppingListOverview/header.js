@@ -34,7 +34,6 @@ function Header() {
                                     color: user.id === loggedInUser ? 'white' : 'black',
                                 }}>
                                     {user.name} 
-                                    {/* {(user.id === loggedInUser).toString()} */}
                             </Dropdown.Item>
                         ))}
                     </Dropdown.Menu>
