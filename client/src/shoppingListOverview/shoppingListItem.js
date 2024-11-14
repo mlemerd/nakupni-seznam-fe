@@ -2,7 +2,7 @@ import { useState, createContext, useContext } from "react";
 
 import { UserContext } from "../users/userProvider";
 
-const ShoppingListContext = createContext();
+export const ShoppingListContext = createContext();
 
 export function ShoppingListProvider({ children }) {
     const {loggedInUser} = useContext(UserContext)
@@ -23,17 +23,19 @@ export function ShoppingListProvider({ children }) {
         }
     ]);
 
-    function handleCreate() {
-        setShoppingListOverviewList((current) => [
-            ...current,
-            {
-                id: Math.random().toString(),
-                name: "Nový úkol",
-                state: "active",
-                owner: loggedInUser,
-                memberList: [],
-            }
-        ]);
+    function handleCreate({ name }) { 
+        if (!name) { console.error("Název nového seznamu je undefined"); 
+            return; 
+        } setShoppingListOverviewList((current) => [ 
+            ...current, 
+            { 
+                id: Math.random().toString(), 
+                name, 
+                state: "active", 
+                owner: loggedInUser, 
+                memberList: [], 
+            } 
+        ]); 
     }
 
     function handleArchive(dtoIn) {
