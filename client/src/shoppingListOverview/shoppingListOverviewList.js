@@ -1,9 +1,14 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { UserContext } from "../users/userProvider";
 import { Button } from "react-bootstrap";
+import DeleteListModal from "./deleteListModal";
 
 function OverviewList({ shoppingListOverviewList, handleArchive, handleDelete, setSelectedList }) {
     const { loggedInUser } = useContext(UserContext);
+    const [showModal, setShowModal] = useState(false)
+    const handleClose = () => setShowModal(false)
+    const handleShow = () => setShowModal(true)
+
 
     return (
         <div>
@@ -18,7 +23,8 @@ function OverviewList({ shoppingListOverviewList, handleArchive, handleDelete, s
                     {loggedInUser === item.owner && (
                         <>
                             <Button onClick={() => handleArchive(item)}>Archive</Button>
-                            <Button onClick={() => handleDelete(item)}>Delete</Button>
+                            <Button onClick={() => handleShow(item)}>Delete</Button>
+                            <DeleteListModal show={showModal} handleClose={handleClose} item={item}/>
                         </>
                     )}
                 </div>

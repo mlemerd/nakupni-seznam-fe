@@ -1,10 +1,8 @@
 import { Button } from "react-bootstrap"
 import CreateShoppingListModal from "./newShoppingListModal"
-import { useState, useContext } from "react"
-import useShoppingList, { ShoppingListContext } from "./shoppingListItem"
+import { useState } from "react"
 
-function Toolbar ({handleCreate, showArchived, setShowArchived}) {
-    const {shoppingListOverviewList} = useShoppingList()
+function Toolbar ({ showArchived, setShowArchived}) {
     const [showModal, setShowModal] = useState(false)
     const handleClose = () => setShowModal(false)
     const handleShow = () => setShowModal(true)
