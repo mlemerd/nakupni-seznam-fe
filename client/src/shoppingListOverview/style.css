@@ -1,0 +1,56 @@
+.body {
+    background-color: #F3E8E2;
+    height: 100vh;
+    margin: 0;
+}
+
+.overview {
+    background-color: #373E40;
+    color: white;
+    height: 92vh;
+}
+
+.buttonMain {
+    background-color: #D6765C !important;
+    border-color: #D6765C !important;
+    margin: 3px;
+    &:hover {
+        background-color: #C45131 !important;
+         border-color: #C45131 !important;
+    }
+    &:active {
+        background-color: #C45131 !important;
+        border-color: #C45131 !important; 
+    }
+}
+
+/* .buttonMain:hover {
+    background-color: #C45131;
+    border-color: #C45131;
+}
+
+.buttonMain:active {
+    background-color: #C45131;
+    border-color: #C45131;
+} */
+
+.slItem {
+    background-color: #373E40;
+    border-color: #373E40;
+    border-radius: 8px ;
+    margin: 5px;
+    margin-left: 15px;
+    width:90%;
+    &:hover {
+        background-color: #2F3537;
+        border-color: #2F3537;
+    }
+    &:active {
+        background-color: #2F3537 !important;
+        border-color: #2F3537 !important;
+    }
+}
+
+.itemName {
+    background-color: #131516;
+}

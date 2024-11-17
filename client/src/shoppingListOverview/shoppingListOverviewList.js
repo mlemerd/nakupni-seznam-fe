@@ -2,6 +2,9 @@ import { useContext, useState } from "react";
 import { UserContext } from "../users/userProvider";
 import { Button } from "react-bootstrap";
 import DeleteListModal from "./deleteListModal";
+import "./style.css"
+import Icon from '@mdi/react';
+import { mdiArchiveOutline, mdiArchiveCheck } from '@mdi/js';
 
 function OverviewList({ shoppingListOverviewList, handleArchive, handleDelete, setSelectedList }) {
     const { loggedInUser } = useContext(UserContext);
@@ -11,23 +14,25 @@ function OverviewList({ shoppingListOverviewList, handleArchive, handleDelete, s
 
 
     return (
-        <div>
-            <h3>Shopping List Overview</h3>
+        <div >
             {shoppingListOverviewList.map((item) => (
-                <div key={item.id}>
-                    <p>Name: {item.name}</p>
-                    <p>State: {item.state}</p>
-                    <p>Owner: {item.owner}</p>
-                    <p>Members: {item.memberList.join(", ")}</p>
-                    <button onClick={() => setSelectedList(item)}>Detail</button>
-                    {loggedInUser === item.owner && (
-                        <>
-                            <Button onClick={() => handleArchive(item)}>Archive</Button>
-                            <Button onClick={() => handleShow(item)}>Delete</Button>
-                            <DeleteListModal show={showModal} handleClose={handleClose} item={item}/>
-                        </>
-                    )}
-                </div>
+                <Button key={item.id} className="slItem"onClick={() => setSelectedList(item)}>
+                    <div className="row">
+                        <div className="col-6">
+                            <h5>{item.name}</h5>
+                        </div>
+                        <div className="col">
+                            {loggedInUser === item.owner && (
+                                <>
+                                    <Button className="buttonMain" onClick={() => handleArchive(item)}>Archivovat</Button>
+                                    <Button className="buttonMain" onClick={() => handleShow(item)}>Smazat</Button>
+                                    <DeleteListModal show={showModal} handleClose={handleClose} item={item}/>
+                                </>
+                            )}
+                        </div>
+                    </div>
+                    <p>{item.state}</p>
+                </Button>
             ))}
         </div>
     );

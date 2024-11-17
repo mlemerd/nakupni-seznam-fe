@@ -2,7 +2,6 @@ import './App.css';
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css'
 import Overview from './shoppingListOverview/shoppingListOverview';
-import Detail from './shoppingListOverview/detail/detail';
 import UserProvider from './users/userProvider';
 import { useState } from 'react';
 
@@ -12,12 +11,12 @@ function App() {
   return (
     <UserProvider>
       <div className='row'>
-        <div className='col-8'>
-          <Overview setSelectedList={setSelectedList} />
+        <div>
+          <Overview setSelectedList={setSelectedList} selectedList={selectedList}/>
         </div>
-        <div className='position-absolute start-50'>
+{/*         <div className='col-6'>
           <Detail selectedList={selectedList}/> 
-        </div>
+        </div> */}
       </div>
     </UserProvider>
   );

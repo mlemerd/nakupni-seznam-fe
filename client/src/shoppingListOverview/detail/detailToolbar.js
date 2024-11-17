@@ -29,7 +29,7 @@ function Toolbar () {
         <div>
             {shoppingListOverviewList.map((item) => (
                 <div key={item.id}>
-                    {loggedInUser === item.owner && (
+                    {loggedInUser.id === item.owner && (
                         <>
                             <Button onClick={handleShow}>Přejmenovat seznam</Button>
                             <RenameForm show={showModal} handleClose={handleClose} data={data}/>

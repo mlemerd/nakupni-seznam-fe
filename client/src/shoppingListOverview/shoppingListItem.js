@@ -24,9 +24,7 @@ export function ShoppingListProvider({ children }) {
     ]);
 
     function handleCreate({ name }) { 
-        if (!name) { console.error("Název nového seznamu je undefined"); 
-            return; 
-        } setShoppingListOverviewList((current) => [ 
+         setShoppingListOverviewList((current) => [ 
             ...current, 
             { 
                 id: Math.random().toString(), 
@@ -38,13 +36,22 @@ export function ShoppingListProvider({ children }) {
         ]); 
     }
 
+
     function handleArchive(dtoIn) {
         setShoppingListOverviewList((current) => {
-          const itemIndex = current.findIndex((item) => item.id === dtoIn.id);
-          current[itemIndex] = { ...current[itemIndex], state: "archived" };
-          return current.slice();
+            const itemIndex = current.findIndex((item) => item.id === dtoIn.id);
+            if (itemIndex > -1) {
+                const updatedList = current.map(item => 
+                    item.id === dtoIn.id 
+                        ? { ...item, state: item.state === "archived" ? "active" : "archived" } 
+                        : item
+                );
+                return updatedList;
+            }
+            return current;
         });
-      }
+    }
+    
 
     function handleDelete(dtoIn) {
         setShoppingListOverviewList((current) => 

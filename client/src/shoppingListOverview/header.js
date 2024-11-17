@@ -9,16 +9,16 @@ function Header() {
     const loggedInUserName = userList.find(user => user.id === loggedInUser)?.name || "Vyber uživatele"
 
     return (
-        <div className="row">
-            <div className="col-11">
-                <h2>
+        <div className="row" style={{backgroundImage: "linear-gradient(to bottom right, #90CBA4, #59B176"}}>
+            <div className="col-10">
+                <h2 style={{ color: "#0C0C1C"}}>
                      AppName
                 </h2>
             </div>
 
             <div className="col">
-                <Dropdown>
-                    <Dropdown.Toggle variant="secondary" id="dropdown-basic">
+                <Dropdown style={{margin:"3px"}}>
+                    <Dropdown.Toggle style={{backgroundColor:"#305252", borderColor:"#305252"}} id="dropdown-basic">
                         {loggedInUserName}
                     </Dropdown.Toggle>
 
@@ -30,7 +30,7 @@ function Header() {
                                 onClick={() => setLoggedInUser(user.id)}
                                 style={{
 
-                                    backgroundColor: user.id === loggedInUser ? '#007bff' : 'transparent',
+                                    backgroundColor: user.id === loggedInUser ? '#D77A61' : 'transparent',
                                     color: user.id === loggedInUser ? 'white' : 'black',
                                 }}>
                                     {user.name} 
