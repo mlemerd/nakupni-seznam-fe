@@ -5,12 +5,13 @@ import { useShoppingList } from "./shoppingListItem";
 import OverviewList from "./shoppingListOverviewList";
 import {UserContext} from "../users/userProvider";
 import Detail from "./detail/detail";
+import { useTranslation } from "react-i18next";
 
 function OverviewProvider({setSelectedList, selectedList}) {
     const { shoppingListOverviewList, handleCreate, handleArchive, handleDelete } = useShoppingList();
     const [showArchived, setShowArchived] = useState(false);
     const { loggedInUser = null } = useContext(UserContext) || {};
-
+    const {t} = useTranslation()
 
    // console.log('Logged-in user in OverviewProvider:', loggedInUser);
 
@@ -38,7 +39,7 @@ function OverviewProvider({setSelectedList, selectedList}) {
                     <div className="overview">
                         <div className="row" style={{backgroundColor: "#262B2C", borderRadius: "8px", marginLeft: "5px", marginRight: "5px"}}>
                             <div className="col-8">
-                                <h4>Přehled nákupních seznamů</h4>
+                                <h4>{t("overview")}</h4>
                             </div>
                             <div className="col">
                                 <Toolbar 

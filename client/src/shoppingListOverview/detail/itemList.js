@@ -1,10 +1,11 @@
 import { useContext, useEffect } from "react";
 import { DetailContext } from "./detailProvider";
 import Item from "./item";
+import { useTranslation } from "react-i18next";
 
 function ItemList() {
     const { data, handlerMap, showResolved, toggleShowResolved } = useContext(DetailContext);
-
+    const {t} = useTranslation()
     useEffect(() => {
         console.log("ItemList data: ", data);
     }, [data]);
@@ -16,9 +17,9 @@ function ItemList() {
 
     return (
         <div>
-            Item List <button onClick={() => handlerMap.addItem()}>Přidat položku</button>
+            Item List <button onClick={() => handlerMap.addItem()}>{t("addItem")}</button>
             <button onClick={() => toggleShowResolved()}>
-                {showResolved ? "Zobrazit pouze nevyřešené" : "Zobrazit všechny položky"}
+                {showResolved ? t("unresolvedItems") : t("allItems")}
             </button>
             <div>
                 {data.itemList.map((item) => (

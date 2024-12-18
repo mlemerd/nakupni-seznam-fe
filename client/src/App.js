@@ -5,10 +5,12 @@ import Overview from './shoppingListOverview/shoppingListOverview';
 import UserProvider from './users/userProvider';
 import { useState } from 'react';
 
+
 function App() {
   const [selectedList, setSelectedList] = useState(null)
 
   return (
+
     <UserProvider>
       <div className='row'>
         <div>
@@ -16,7 +18,7 @@ function App() {
         </div>
 {/*         <div className='col-6'>
           <Detail selectedList={selectedList}/> 
-        </div> */}
+        </div>  */}
       </div>
     </UserProvider>
   );

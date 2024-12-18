@@ -3,22 +3,24 @@ import Toolbar from "./detailToolbar";
 import MemberList from "./memberList";
 import ItemList from "./itemList";
 import { ShoppingListProvider } from "../shoppingListItem";
+import { useTranslation } from "react-i18next";
 
 import { Card } from "react-bootstrap";
 
 function Detail ({selectedList}) {
+    const {t} = useTranslation()
     if (!selectedList) {
-        return <p>Select a shopping list to see details</p>;
+        return <p>{t("select")}</p>;
     }
     return (
         <div style={{width: 600}}>
             <Card className="card-header">
                 <h3>
-                    Detail seznamu
+                    {t("detail")}
                 </h3>
-                <p>Název: {selectedList.name}</p>
-                <p>Stav: {selectedList.state}</p>
-                <p>Majitel: {selectedList.owner}</p>
+                <p>{t("name")}: {selectedList.name}</p>
+                <p>{t("state")}: {selectedList.state}</p>
+                <p>{t("owner")}: {selectedList.owner}</p>
             </Card>
             <Card className="card-body">
               <DetailProvider selectedList={selectedList}>

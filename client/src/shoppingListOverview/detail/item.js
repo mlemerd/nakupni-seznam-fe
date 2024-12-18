@@ -1,7 +1,9 @@
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 
 function Item ({data, handlerMap}) {
     const [value, setValue] = useState(data.name)
+    const {t} = useTranslation()
 
     return(
         <div>
@@ -12,10 +14,10 @@ function Item ({data, handlerMap}) {
                 onBlur={() => handlerMap.updateItemName({ id: data.id, name: value })}
             /> {" "}
             <button onClick={() => handlerMap.toggleResolveItem({ id: data.id })}>
-                {data.resolved ? "vrátit" : "hotovo"}
+                {data.resolved ? t("restore") : t("done")}
             </button>
             <button onClick={() => handlerMap.deleteItem({ id: data.id })}>
-                smazat
+                {t("delete")}
             </button>
         </div>
     )

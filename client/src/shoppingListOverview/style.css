@@ -10,6 +10,16 @@
     height: 92vh;
 }
 
+.dropdown{
+    background-color: #305252 !important ;
+    border-color: #305252 !important ;
+    margin: 3px ;
+    &:active {
+        background-color: #D77A61;
+        border-color: #D77A61;
+    }
+}
+
 .buttonMain {
     background-color: #D6765C !important;
     border-color: #D6765C !important;
