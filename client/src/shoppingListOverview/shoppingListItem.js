@@ -12,14 +12,16 @@ export function ShoppingListProvider({ children }) {
             name: "První seznam",
             state: "active",
             owner: "u1",
-            memberList: ["u2"]
+            memberList: ["u2"],
+            itemList: [{ id: "item1", name: "Milk", resolved: false }]
         },
         {
             id: "sl02",
             name: "Druhý seznam",
             state: "active",
             owner: "u2",
-            memberList: ["u1", "u3"]
+            memberList: ["u1", "u3"],
+            itemList: [{ id: "item2", name: "Bread", resolved: false }, { id: "item3", name: "Butter", resolved: true }]
         }
     ]);
 

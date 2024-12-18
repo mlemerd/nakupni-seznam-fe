@@ -85,11 +85,6 @@ function DetailProvider({ children, selectedList }) {
         toggleShowResolved: () => setShowResolved((current) => !current),
     };
 
-   /*  useEffect(() => {
-        console.log('Selected List updated: ', selectedList);
-        setData(selectedList ? { ...selectedList, itemList: selectedList.itemList || [] } : defaultData);
-    }, [selectedList]); */
-
     console.log('DetailContext value:', value);
 
     return (

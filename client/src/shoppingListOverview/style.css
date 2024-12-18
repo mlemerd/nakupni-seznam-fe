@@ -1,13 +1,13 @@
 .body {
     background-color: #F3E8E2;
-    height: 100vh;
+    height: 100%;
     margin: 0;
 }
 
 .overview {
     background-color: #373E40;
     color: white;
-    height: 92vh;
+    height: 100%;
 }
 
 .dropdown{

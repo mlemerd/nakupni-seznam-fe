@@ -2,6 +2,7 @@ import DetailProvider from "./detailProvider";
 import Toolbar from "./detailToolbar";
 import MemberList from "./memberList";
 import ItemList from "./itemList";
+import ShoppingListChart from "./shoppingListChart";
 import { ShoppingListProvider } from "../shoppingListItem";
 import { useTranslation } from "react-i18next";
 
@@ -29,8 +30,10 @@ function Detail ({selectedList}) {
                 </ShoppingListProvider>
                  <MemberList/>
                  <ItemList/>
+                 <ShoppingListChart/>
               </DetailProvider>
             </Card>
+
         </div>
     )
 }

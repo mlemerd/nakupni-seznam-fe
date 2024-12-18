@@ -5,6 +5,7 @@ import { useShoppingList } from "./shoppingListItem";
 import OverviewList from "./shoppingListOverviewList";
 import {UserContext} from "../users/userProvider";
 import Detail from "./detail/detail";
+import ShoppingListBarChart from "./shoppingListBarChart";
 import { useTranslation } from "react-i18next";
 
 function OverviewProvider({setSelectedList, selectedList}) {
@@ -56,6 +57,7 @@ function OverviewProvider({setSelectedList, selectedList}) {
                             handleDelete={handleDelete}
                             setSelectedList={setSelectedList}
                         />
+                        <ShoppingListBarChart/>
                     </div>
                 </div>
                 <div className="col-7">

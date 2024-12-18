@@ -3,10 +3,12 @@ import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import { useState, useContext } from "react";
 import { ShoppingListContext } from "./shoppingListItem";
+import { useTranslation } from "react-i18next";
 
 function CreateShoppingListModal({ show, handleClose }) {
     const [name, setName] = useState("");
     const { handleCreate } = useContext(ShoppingListContext);
+    const {t} = useTranslation()
 
     const onSubmit = (e) => {
         e.preventDefault();
@@ -18,14 +20,14 @@ function CreateShoppingListModal({ show, handleClose }) {
         <Modal show={show} onHide={handleClose}>
             <Form onSubmit={onSubmit}>
                 <Modal.Header closeButton>
-                    <Modal.Title>Vytvořit nový nákupní seznam</Modal.Title>
+                    <Modal.Title>{t("createForm")}</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
                     <Form.Group controlId="formShoppingListName">
-                        <Form.Label>Název</Form.Label>
+                        <Form.Label>{t("name")}</Form.Label>
                         <Form.Control
                             type="text"
-                            placeholder="Zadejte název nákupního seznamu"
+                            placeholder= {t("enterName")}
                             value={name}
                             onChange={(e) => setName(e.target.value)}
                             required
@@ -34,10 +36,10 @@ function CreateShoppingListModal({ show, handleClose }) {
                 </Modal.Body>
                 <Modal.Footer>
                     <Button variant="secondary" onClick={handleClose}>
-                        Zavřít
+                        {t("close")}
                     </Button>
                     <Button type="submit" variant="primary">
-                        Vytvořit
+                        {t("create")}
                     </Button>
                 </Modal.Footer>
             </Form>
