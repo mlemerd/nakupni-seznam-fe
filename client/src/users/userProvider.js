@@ -31,7 +31,11 @@ function UserProvider ({children}) {
     }
 
     console.log('Initial loggedInUser:', loggedInUser);
-    return <UserContext.Provider value={value}>{children}</UserContext.Provider>
+    return( 
+        <UserContext.Provider value={value}>
+            {children}
+        </UserContext.Provider>
+    )
 }
 
 export default UserProvider

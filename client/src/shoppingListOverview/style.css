@@ -1,5 +1,11 @@
-.body {
+.body[data-theme="light"] {
     background-color: #F3E8E2;
+    height: 100%;
+    margin: 0;
+}
+
+.body[data-theme="dark"] {
+    background-color: #262b2c;
     height: 100%;
     margin: 0;
 }
@@ -10,10 +16,22 @@
     height: 100%;
 }
 
-.dropdown{
+.dropdown[data-theme="light"]{
     background-color: #305252 !important ;
     border-color: #305252 !important ;
     margin: 3px ;
+    &:active {
+        background-color: #D77A61;
+        border-color: #D77A61;
+    }
+}
+
+.dropdown[data-theme="dark"]{
+    color: white !important;
+    background-color: #305252 !important ;
+    border-color: #305252 !important ;
+    margin: 3px ;
+
     &:active {
         background-color: #D77A61;
         border-color: #D77A61;

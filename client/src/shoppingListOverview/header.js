@@ -1,10 +1,13 @@
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import { UserContext } from "../users/userProvider";
 import "./style.css"
-import { Dropdown } from "react-bootstrap";
+import { Dropdown, Button } from "react-bootstrap";
 import { useTranslation } from "react-i18next";
+import Icon from "@mdi/react"
+import {mdiThemeLightDark} from "@mdi/js"
 
 function Header() {
+
     const { userList, loggedInUser, setLoggedInUser } = useContext(UserContext);
     const loggedInUserName = userList.find(user => user.id === loggedInUser)?.name || "Vyber uživatele";
 
@@ -14,8 +17,15 @@ function Header() {
       cs: { nativeName: "Čeština", shortName: "cs" },
     };
     const currentLanguage = lngs[i18n.resolvedLanguage] || lngs.en;
-    const welcomeText = t("welcome")
-    console.log("welcome text:", welcomeText)
+
+    const [theme, setTheme] = useState("light");
+
+    useEffect(() => {
+        // change theme globally
+        const htmlElement = document.getElementsByTagName("html");
+        htmlElement[0].setAttribute("data-theme", theme);
+        htmlElement[0].setAttribute("data-bs-theme", theme);
+    }, [theme]);
 
     return (
         <div className="row" style={{backgroundImage: "linear-gradient(to bottom right, #90CBA4, #59B176"}}>
@@ -26,7 +36,18 @@ function Header() {
             </div>
 
             <div className="col">
-                <Dropdown style={{margin:"3px"}}>
+                <Button 
+                    className="buttonMain"
+                    onClick={() =>
+                        setTheme((current) => (current === "light" ? "dark" : "light"))
+                      }
+                >
+                     <Icon path={mdiThemeLightDark} size={1} />
+                </Button>
+            </div>
+
+            <div className="col">
+                <Dropdown className="dropdown" style={{margin:"3px"}}>
                     <Dropdown.Toggle style={{backgroundColor:"#305252", borderColor:"#305252"}} id="dropdown-basic">
                       {currentLanguage.shortName}
                     </Dropdown.Toggle>
@@ -38,7 +59,7 @@ function Header() {
                             onClick={() => i18n.changeLanguage(lng)}
                             style={{
                                 backgroundColor: i18n.resolvedLanguage === lng ? "#D77A61" : "transparent",
-                                color: i18n.resolvedLanguage === lng ? "white" : "black",
+                                color: theme === "light" ? (i18n.resolvedLanguage === lng ? "white" : "black") : "white",
                             }}
                         >
                             {lngs[lng].nativeName}
@@ -51,7 +72,7 @@ function Header() {
             <div className="col">
                 <Dropdown style={{margin:"3px"}}>
                     <Dropdown.Toggle style={{backgroundColor:"#305252", borderColor:"#305252"}} id="dropdown-basic">
-                        {t('user')}: {loggedInUserName} {/* Použito překládání */}
+                        {t('user')}: {loggedInUserName}
                     </Dropdown.Toggle>
 
                     <Dropdown.Menu>
